@@ -1,4 +1,4 @@
-application: auto
+application: gqcp-bb84enhancement
 version: auto
 runtime: python27
 api_version: 1
