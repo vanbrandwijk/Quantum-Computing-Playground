@@ -640,7 +640,6 @@ quantum.QScript.prototype.tokenize = function(line) {
     // c holds the current character.
     var c = line[i];
     if (c <= ' ') {
-      this.errors.push('Found some control characters?');
       switch (state) {
         case 0:
           break;
@@ -659,6 +658,7 @@ quantum.QScript.prototype.tokenize = function(line) {
       }
     } else if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') ||
                (c >= '0' && c <= '9') || c == '_' || c == '.' || c == '[' || c == ']') {
+                 this.errors.push(c + ' (state: ' + state ')');
       switch (state) {
         case 0:
           body = c;
