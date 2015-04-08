@@ -657,8 +657,7 @@ quantum.QScript.prototype.tokenize = function(line) {
           break;
       }
     } else if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') ||
-               (c >= '0' && c <= '9') || c == '_' || c == '.' || c == '[' || c == ']') {
-                 this.errors.push(c + ' (state: ' + state ')');
+               (c >= '0' && c <= '9') || c == '_' || c == '.') {
       switch (state) {
         case 0:
           body = c;
@@ -1085,7 +1084,7 @@ quantum.QScript.prototype.compileFunction = function(parent, fn, args, line) {
       // It's not a builtin call, so perhaps a JS expression.
       if (t[1].body[0] == '=' || t[1].body[0] == '+' || t[1].body[0] == '-' ||
           t[1].body[0] == '*' || t[1].body[0] == '/' || t[1].body[0] == '&' ||
-          t[1].body[0] == '|' || t[1].body[0] == '^' ) {
+          t[1].body[0] == '|' || t[1].body[0] == '^') {
         // Assume it is a JS expression.
         f.code.push(new quantum.QScript.Opcode(
             quantum.QScript.CommandCode.EXPRESSION, [t], line, -1));
