@@ -640,6 +640,7 @@ quantum.QScript.prototype.tokenize = function(line) {
     // c holds the current character.
     var c = line[i];
     if (c <= ' ') {
+      this.errors.push('Found some control characters?');
       switch (state) {
         case 0:
           break;
