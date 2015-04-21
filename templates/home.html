@@ -13,6 +13,10 @@
         <h2>Quantum Computing Playground</h2>
       </div>
       <p>
+        This project is an enhancement of the original Quantum Computing Playground aimed at adding
+        support for array indexing and networking functionality.  The motivation for this enhancement
+        is to enable support for the BB84 protocol.
+        
         Quantum Computing Playground is a browser-based WebGL Chrome Experiment.
         It features a GPU-accelerated quantum computer with a simple IDE interface,
         and its own scripting language with debugging and 3D quantum state visualization features.
@@ -20,10 +24,6 @@
         run Grover's and Shor's algorithms, and has a variety of quantum gates
         built into the scripting language itself.
       </p><br />
-      <p><a href="" ng-click="loadPlayground(examples.DEFAULT)" class="btn btn-primary btn-lg"
-            role="button">Start with Basic Example &raquo;</a></p>
-      <p><a href="" ng-click="loadPlayground(examples.SHORS)" class="btn btn-success btn-lg"
-            role="button">Play with Shor's Algorithm &raquo;</a></p>
     </div>
   </div>
   <div class="col-sm-6">
@@ -60,15 +60,5 @@
       for program execution both forward and in reverse without any side-effects.
     </p>
     <div class="page-header"><h3>Where can I buy a real quantum computer?</h3></div>
-    <p>
-      As of today the only company selling quantum computers is
-      <a href="http://www.dwavesys.com">D-Wave</a>, but unfortunately their architecture does not
-      perform arbitrary quantum gate operations on sequences of qubits (which is what
-      Quantum Computing Playground simulates at this time).
-      The proof-of-concepts for capabilities of quantum computing
-      have been demonstrated in multiple laboratories around the world though, so there is a chance
-      that quantum computers will become one day everyday’s reality.
-      For now, you can experience the technology of tomorrow today, inside our Playground.
-    </p>
   </div>
 </div>
