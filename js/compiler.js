@@ -573,9 +573,9 @@ quantum.QScript.Opcode = function(cmd, args, line, target) {
  * @param {number} vs State vector size in qbits, between 6 and 22.
  */
 quantum.QScript.prototype.init = function(vs) {
-  if (vs < 6 || vs > 22 || (vs & 1) != 0) {
+  if (vs < 6 || vs > 24 || (vs & 1) != 0) {
     this.errors.push(
-        'State vector size outside of supported range 6..22 or not even: ' +
+        'State vector size outside of supported range 6..24 or not even: ' +
         vs);
     return;
   }
