@@ -639,7 +639,7 @@ quantum.QScript.prototype.tokenize = function(line) {
   for (i = 0; i < idxCmt; i++) {
     // c holds the current character.
     var c = line[i];
-      this.errors.push('state: ' + state + ' ' + c + ' ' + body)
+      this.errors.push('state: ' + state + ' ' + c + ' THEBODY:' + body)
     if (c <= ' ') {
       switch (state) {
         case 0:
