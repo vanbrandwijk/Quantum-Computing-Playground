@@ -639,6 +639,7 @@ quantum.QScript.prototype.tokenize = function(line) {
   for (i = 0; i < idxCmt; i++) {
     // c holds the current character.
     var c = line[i];
+      this.errors.push('state: ' + state + ' ' + c)
     if (c <= ' ') {
       switch (state) {
         case 0:
@@ -659,7 +660,6 @@ quantum.QScript.prototype.tokenize = function(line) {
     } else if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') ||
                (c >= '0' && c <= '9') || c == '_' || c == '.' || c == '[' || c == ']') {
                  
-      this.errors.push('state: ' + state + ' ' + c)
       switch (state) {
         case 0:
           body = c;
