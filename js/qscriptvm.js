@@ -102,7 +102,13 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
       // Detect assignment of new local variables.
       if (i == 0 && ex.length > 1 && ex[1].body == '=' &&
           !this.currentFunc.locals.hasOwnProperty(ex[i].body)) {
-        this.currentFunc.locals[ex[i].body] = 0;
+
+	//right here, this is the money.
+	if ( ex[2].body == '[]' ) {
+		this.currentFunc.locals[ex[i].body] = array();
+	} else {
+	        this.currentFunc.locals[ex[i].body] = 0;
+	}
         this.buildLocals(this.currentFunc);
       }
       expr += this.translateId(
