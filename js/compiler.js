@@ -639,7 +639,6 @@ quantum.QScript.prototype.tokenize = function(line) {
   for (i = 0; i < idxCmt; i++) {
     // c holds the current character.
     var c = line[i];
-      this.errors.push('state: ' + state + ' ' + c + ' THEBODY:' + body)
     if (c <= ' ') {
       switch (state) {
         case 0:
@@ -781,17 +780,11 @@ quantum.QScript.prototype.tokenize = function(line) {
   }
   switch (state) {
     case 1:
-      this.errors.push('State 1');
       tokens.push(new quantum.QScript.Token(quantum.QScript.ID, body));
       break;
     case 2:
-      this.errors.push('State 2');
-      break;
     case 3:
-      this.errors.push('State 3');
-      break;
     case 4:
-      this.errors.push('State 4');
       tokens.push(new quantum.QScript.Token(quantum.QScript.EXPRESSION, body));
       break;
   }
