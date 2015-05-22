@@ -788,6 +788,9 @@ quantum.QScript.prototype.tokenize = function(line) {
       tokens.push(new quantum.QScript.Token(quantum.QScript.EXPRESSION, body));
       break;
   }
+
+	alert(tokens);
+
   return tokens;
 };
 
