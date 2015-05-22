@@ -789,7 +789,7 @@ quantum.QScript.prototype.tokenize = function(line) {
       break;
   }
 
-	alert(tokens);
+	alert(JSON.stringify(tokens));
 
   return tokens;
 };
