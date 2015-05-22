@@ -105,7 +105,7 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 
 	//right here, this is the money.
 	if ( ex[2].body == '[]' ) {
-		this.currentFunc.locals[ex[i].body] = array();
+		this.currentFunc.locals[ex[i].body] = new Array();
 	} else {
 	        this.currentFunc.locals[ex[i].body] = 0;
 	}
