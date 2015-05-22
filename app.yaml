@@ -1,5 +1,5 @@
 application: gqcp-bb84enhancement
-version: auto
+version: goobar 
 runtime: python27
 api_version: 1
 threadsafe: yes
