@@ -1099,7 +1099,7 @@ quantum.QScript.prototype.compileFunction = function(parent, fn, args, line) {
         continue;
       }
       // Nothing worked, so it is a script error.
-      this.errors.push('Unknown command in line ' + line);
+      this.errors.push('Unknown command in line ' + line + JSON.stringify(t));
       continue;
     }
 
