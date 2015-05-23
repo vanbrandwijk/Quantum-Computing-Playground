@@ -657,7 +657,7 @@ quantum.QScript.prototype.tokenize = function(line) {
           break;
       }
     } else if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') ||
-               (c >= '0' && c <= '9') || c == '_' || c == '.' || c == '[' || c == ']') {
+               (c >= '0' && c <= '9') || c == '_' || c == '.' ) {
                  
       switch (state) {
         case 0:
