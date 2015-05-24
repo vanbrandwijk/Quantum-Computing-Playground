@@ -104,11 +104,30 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 		alert('Array found');
 		//Looks like we got an array here, pard
 		subEx = new Array();
-		for ( j = 1; j < ex.length - i; j++ ) {
-			subEx[j] = ex[i + j];
+		nestLevel = 0;
+
+		subEx.push(ex[i+1]);
+		subEx[0].body = subEx[0].body.replace('[', '');
+		if ( subEx[0].body.length == 0 ) {
+			subEx.shift();
+		}
+		
+		for ( j = i+2; j < ex.length; j++ ) {
+			if ( ex[j].body.contains('[') ) {
+				nestLevel++;
+			}
+			subEx.push(ex[j]);
 			if ( ex[i + j].body.contains(']') ) {
+				nestLevel--;
+			}
+			if ( nestLevel == 0 ) {
+				subEx[subEx.length - 1].body = 
+					subEx[subEx.length - 1].body.replece(']', '');
+				if ( subEx[subEx.length - 1].body.length == 0 ) {
+					subEx.pop();
+				}
 				break;
-			} 
+			}
 		}
 		alert("Array index: " + JSON.stringify(subEx));
 		arrayIndex = this.executeExpression(subEx);
