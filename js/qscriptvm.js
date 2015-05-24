@@ -100,13 +100,13 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
   for (i = 0; i < ex.length; i++) {
     if (ex[i].type == quantum.QScript.ID) {
 	//Detect scalar or array
-	if ( ex[i+1].charAt(0) == '[' ) {
+	if ( ex[i+1].body.charAt(0) == '[' ) {
 		alert('Array found');
 		//Looks like we got an array here, pard
 		subEx = new Array();
 		for ( j = 1; j < ex.length - i; j++ ) {
 			subEx[j] = ex[i + j];
-			if ( ex[i + j].contains(']') ) {
+			if ( ex[i + j].body.contains(']') ) {
 				break;
 			} 
 		}
