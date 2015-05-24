@@ -100,7 +100,7 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
   for (i = 0; i < ex.length; i++) {
     if (ex[i].type == quantum.QScript.ID) {
 	//Detect scalar or array
-	if ( ex[i+1].body.charAt(0) == '[' ) {
+	if ( ex.length > i+1 && ex[i+1].body.charAt(0) == '[' ) {
 		alert('Array found');
 		//Looks like we got an array here, pard
 		subEx = new Array();
