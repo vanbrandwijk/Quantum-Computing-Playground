@@ -100,10 +100,13 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
   // Parse expression and replace identifiers with scoped symbols.
   for (i = 0; i < ex.length; i++) {
     if (ex[i].type == quantum.QScript.ID) {
+	isScalar = true;
+	j = 0;
+	arrayIndex = 0;
 	//Detect scalar or array
 	if ( ex.length > i+1 && ex[i+1].body.charAt(0) == '[' ) {
-		alert('Array found');
 		//Looks like we got an array here, pard
+		isScalar = false;
 		subEx = new Array();
 		nestLevel = 0;
 		
@@ -121,25 +124,29 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 		if ( subEx[0].body.length == 0 ) {
 			subEx.shift();
 		}
-		subEx[0].body = subEx[0].body.replace(']', '');
-		if ( subEx[0].body.length == 0 ) {
+		subEx[subEx.length - 1].body = 
+			subEx[subEx.length - 1].body.replace(']', '');
+		if ( subEx[subEx.length - 1].body.length == 0 ) {
 			subEx.pop();
 		}
 
+		if ( subEx.length = 0 ) {
+			alert("New empty array");
+		}
 		alert("Array index: " + JSON.stringify(subEx));
 		arrayIndex = this.executeExpression(subEx);
 		alert(arrayIndex);
+	} else {
+		// Detect assignment of new local variables.
+		if (i == 0 && ex.length > 1 && ex[1].body == '=' &&
+	        	!this.currentFunc.locals.hasOwnProperty(ex[i].body)) {
+	
+			this.currentFunc.locals[ex[i].body] = 0;
+		        this.buildLocals(this.currentFunc);
+		}
+		expr += this.translateId(
+		/** @type {!quantum.QScript.Func} */(this.currentFunc), ex[i].body);
 	}
-
-      // Detect assignment of new local variables.
-      if (i == 0 && ex.length > 1 && ex[1].body == '=' &&
-          !this.currentFunc.locals.hasOwnProperty(ex[i].body)) {
-
-	this.currentFunc.locals[ex[i].body] = 0;
-        this.buildLocals(this.currentFunc);
-      }
-      expr += this.translateId(
-          /** @type {!quantum.QScript.Func} */(this.currentFunc), ex[i].body);
     } else {
       // Not identifier, just append it to the JS expression.
       expr += ex[i].body;
