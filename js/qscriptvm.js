@@ -112,6 +112,11 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 		if ( subEx[0].body.length == 0 ) {
 			subEx.shift();
 		}
+		subEx[0].body = subEx[0].body.replace(']', '');
+		if ( subEx[0].body.length == 0 ) {
+			subEx.pop();
+			nestLevel--;
+		}
 		
 		for ( j = i+2; j < ex.length && nestLevel > 0; j++ ) {
 			if ( ex[j].body.contains('[') ) {
