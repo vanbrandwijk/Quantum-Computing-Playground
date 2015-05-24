@@ -111,6 +111,8 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 			} 
 		}
 		alert("Array index: " + JSON.stringify(subEx));
+		arrayIndex = this.executeExpression(subEx);
+		alert(arrayIndex);
 	}
 
       // Detect assignment of new local variables.
