@@ -122,7 +122,7 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 			}
 			if ( nestLevel == 0 ) {
 				subEx[subEx.length - 1].body = 
-					subEx[subEx.length - 1].body.replece(']', '');
+					subEx[subEx.length - 1].body.replace(']', '');
 				if ( subEx[subEx.length - 1].body.length == 0 ) {
 					subEx.pop();
 				}
