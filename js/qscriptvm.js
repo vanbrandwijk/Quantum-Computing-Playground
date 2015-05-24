@@ -139,7 +139,7 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 			this.currentFunc.locals[ex[i].body] = new Array();
 			this.buildLocals(this.currentFunc);
 		}
-		expr += this.translateId( (this.currentFunc), ex[i].body, arrayIndex);
+		expr += this.translateId( (this.currentFunc), ex[i].body) + '[' + arrayIndex + ']';
 		i = j;
 
 	} else {
@@ -151,7 +151,7 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 		        this.buildLocals(this.currentFunc);
 		}
 		expr += this.translateId(
-		/** @type {!quantum.QScript.Func} */(this.currentFunc), ex[i].body) + '[' + arrayIndex + ']';
+		/** @type {!quantum.QScript.Func} */(this.currentFunc), ex[i].body);
 	}
     } else {
       // Not identifier, just append it to the JS expression.
