@@ -113,7 +113,7 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 			subEx.shift();
 		}
 		
-		for ( j = i+2; j < ex.length; j++ ) {
+		for ( j = i+2; j < ex.length && nestLevel > 0; j++ ) {
 			if ( ex[j].body.contains('[') ) {
 				nestLevel++;
 			}
@@ -127,7 +127,6 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 				if ( subEx[subEx.length - 1].body.length == 0 ) {
 					subEx.pop();
 				}
-				break;
 			}
 		}
 		alert("Array index: " + JSON.stringify(subEx));
