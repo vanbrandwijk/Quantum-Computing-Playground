@@ -105,9 +105,18 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 		alert('Array found');
 		//Looks like we got an array here, pard
 		subEx = new Array();
-		nestLevel = 1;
+		nestLevel = 0;
+		
+		for ( j = i+1; j < ex.length && (j == i+1 || nestLevel > 0); j++ ) {
+			if ( ex[j].body.contains('[') ) {
+				nestLevel++;
+			}
+			subEx.push(ex[j]);
+			if ( ex[j].body.contains(']') ) {
+				nestLevel--;
+			}
+		}
 
-		subEx.push(ex[i+1]);
 		subEx[0].body = subEx[0].body.replace('[', '');
 		if ( subEx[0].body.length == 0 ) {
 			subEx.shift();
@@ -115,25 +124,8 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 		subEx[0].body = subEx[0].body.replace(']', '');
 		if ( subEx[0].body.length == 0 ) {
 			subEx.pop();
-			nestLevel--;
 		}
-		
-		for ( j = i+2; j < ex.length && nestLevel > 0; j++ ) {
-			if ( ex[j].body.contains('[') ) {
-				nestLevel++;
-			}
-			subEx.push(ex[j]);
-			if ( ex[i + j].body.contains(']') ) {
-				nestLevel--;
-			}
-			if ( nestLevel == 0 ) {
-				subEx[subEx.length - 1].body = 
-					subEx[subEx.length - 1].body.replace(']', '');
-				if ( subEx[subEx.length - 1].body.length == 0 ) {
-					subEx.pop();
-				}
-			}
-		}
+
 		alert("Array index: " + JSON.stringify(subEx));
 		arrayIndex = this.executeExpression(subEx);
 		alert(arrayIndex);
