@@ -1124,6 +1124,4 @@ quantum.QScript.prototype.compile = function(script) {
   this.currentFunc = this.main;
   this.currentStep = 0;
   this.callStack = [];
-
-	alert(JSON.stringify(this.main));
 };
