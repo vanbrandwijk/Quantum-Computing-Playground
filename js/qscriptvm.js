@@ -99,16 +99,26 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
   // Parse expression and replace identifiers with scoped symbols.
   for (i = 0; i < ex.length; i++) {
     if (ex[i].type == quantum.QScript.ID) {
+	//Detect scalar or array
+	if ( ex[i+1].charAt(0) == '[' ) {
+		alert('Array found');
+		//Looks like we got an array here, pard
+		subEx = new Array();
+		for ( j = 1; j < ex.length - i; j++ ) {
+			subEx[j] = ex[i + j];
+			if ( ex[i + j].contains(']') ) {
+				break;
+			} 
+		}
+		alert("Array index: " + JSON.stringify(subEx));
+	}
+
       // Detect assignment of new local variables.
       if (i == 0 && ex.length > 1 && ex[1].body == '=' &&
           !this.currentFunc.locals.hasOwnProperty(ex[i].body)) {
 
 	//right here, this is the money.
-	if ( ex[2].body == '[]' ) {
-		this.currentFunc.locals[ex[i].body] = new Array();
-	} else {
-	        this.currentFunc.locals[ex[i].body] = 0;
-	}
+	this.currentFunc.locals[ex[i].body] = 0;
         this.buildLocals(this.currentFunc);
       }
       expr += this.translateId(
