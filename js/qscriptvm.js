@@ -112,7 +112,7 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 			subEx.shift();
 		}
 		
-		for ( j = i+2; j < ex.length; j++ ) {
+		for ( j = i+1; j < ex.length; j++ ) {
 			if ( ex[j].body.contains('[') ) {
 				nestLevel++;
 			}
