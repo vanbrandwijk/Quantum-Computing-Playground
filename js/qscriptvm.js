@@ -96,6 +96,7 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
     opt_prefix = '';
   }
 
+  //right here, this is the money.
   // Parse expression and replace identifiers with scoped symbols.
   for (i = 0; i < ex.length; i++) {
     if (ex[i].type == quantum.QScript.ID) {
@@ -112,7 +113,7 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 			subEx.shift();
 		}
 		
-		for ( j = i+1; j < ex.length; j++ ) {
+		for ( j = i+2; j < ex.length; j++ ) {
 			if ( ex[j].body.contains('[') ) {
 				nestLevel++;
 			}
@@ -138,7 +139,6 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
       if (i == 0 && ex.length > 1 && ex[1].body == '=' &&
           !this.currentFunc.locals.hasOwnProperty(ex[i].body)) {
 
-	//right here, this is the money.
 	this.currentFunc.locals[ex[i].body] = 0;
         this.buildLocals(this.currentFunc);
       }
