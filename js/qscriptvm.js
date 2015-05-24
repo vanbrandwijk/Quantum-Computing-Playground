@@ -104,6 +104,7 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 	if ( ex.length > i+1 && ex[i+1].body.charAt(0) == '[' ) {
 		//Looks like we got an array here, pard
 		subEx = new Array();
+		j = 0;
 		nestLevel = 0;
 		
 		for ( j = i+1; j < ex.length && (j == i+1 || nestLevel > 0); j++ ) {
@@ -116,13 +117,10 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 			}
 		}
 
-		alert("Array index: " + JSON.stringify(subEx));
 		subEx[0].body = subEx[0].body.replace('[', '');
-		alert("Array index: " + JSON.stringify(subEx));
 		if ( subEx[0].body.length == 0 ) {
 			subEx.shift();
 		}
-		alert("Array index: " + JSON.stringify(subEx));
 		subEx[subEx.length - 1].body = 
 			subEx[subEx.length - 1].body.replace(']', '');
 		if ( subEx[subEx.length - 1].body.length == 0 ) {
@@ -132,9 +130,18 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 		if ( subEx.length == 0 ) {
 			alert("New empty array");
 		}
-		alert("Array index: " + JSON.stringify(subEx));
 		arrayIndex = this.executeExpression(subEx);
 		alert(arrayIndex);
+		
+		if ( i == 0 && ex[j+1] == '=' &&
+			!this.currentFunc.locals.hasOwnProperty(ex[i].body[arrayIndex]) ) {
+			//new array entry
+			this.currentFunc.locals[ex[i].body[arrayIndex]] = 0;
+			this.buildLocals(this.currentFunc);
+		}
+		expr += this.translateId( (this.currentFunc), ex[i].body[arrayIndex]);
+		i = j;
+
 	} else {
 		// Detect assignment of new local variables.
 		if (i == 0 && ex.length > 1 && ex[1].body == '=' &&
