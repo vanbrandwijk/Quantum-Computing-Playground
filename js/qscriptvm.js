@@ -211,6 +211,7 @@ quantum.QScript.prototype.getCurrentLocals = function() {
   var locals = [];
   // Get current values of local variables.
   var va = this.eval_(this.currentFunc.localExpr);
+alert(JSON.stringify(va));
   // Create list of local variables with values for easy display.
   for (i = 0; i < this.currentFunc.localIds.length; i++) {
     locals.push([this.currentFunc.localIds[i], va[i].toString()]);
