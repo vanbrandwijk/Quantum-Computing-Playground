@@ -132,11 +132,11 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 		}
 		arrayIndex = this.executeExpression(subEx);
 		alert(arrayIndex);
-		
+
 		if ( i == 0 && ex[j+1] == '=' &&
-			!this.currentFunc.locals.hasOwnProperty(ex[i].body[arrayIndex]) ) {
-			//new array entry
-			this.currentFunc.locals[ex[i].body[arrayIndex]] = 0;
+			!this.currentFunc.locals.hasOwnProperty(ex[i].body) ) {
+			//new array
+			this.currentFunc.locals[ex[i].body] = new Array();
 			this.buildLocals(this.currentFunc);
 		}
 		expr += this.translateId( (this.currentFunc), ex[i].body[arrayIndex]);
