@@ -100,13 +100,9 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
   // Parse expression and replace identifiers with scoped symbols.
   for (i = 0; i < ex.length; i++) {
     if (ex[i].type == quantum.QScript.ID) {
-	isScalar = true;
-	j = 0;
-	arrayIndex = 0;
 	//Detect scalar or array
 	if ( ex.length > i+1 && ex[i+1].body.charAt(0) == '[' ) {
 		//Looks like we got an array here, pard
-		isScalar = false;
 		subEx = new Array();
 		nestLevel = 0;
 		
@@ -120,14 +116,15 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 			}
 		}
 
+		alert("Array index: " + JSON.stringify(subEx));
 		subEx[0].body = subEx[0].body.replace('[', '');
 		if ( subEx[0].body.length == 0 ) {
-			subEx.shift();
+	//		subEx.shift();
 		}
 		subEx[subEx.length - 1].body = 
 			subEx[subEx.length - 1].body.replace(']', '');
 		if ( subEx[subEx.length - 1].body.length == 0 ) {
-			subEx.pop();
+	//		subEx.pop();
 		}
 
 		if ( subEx.length = 0 ) {
