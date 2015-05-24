@@ -104,7 +104,7 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 		alert('Array found');
 		//Looks like we got an array here, pard
 		subEx = new Array();
-		nestLevel = 0;
+		nestLevel = 1;
 
 		subEx.push(ex[i+1]);
 		subEx[0].body = subEx[0].body.replace('[', '');
