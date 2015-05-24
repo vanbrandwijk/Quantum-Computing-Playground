@@ -118,9 +118,11 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 
 		alert("Array index: " + JSON.stringify(subEx));
 		subEx[0].body = subEx[0].body.replace('[', '');
+		alert("Array index: " + JSON.stringify(subEx));
 		if ( subEx[0].body.length == 0 ) {
 	//		subEx.shift();
 		}
+		alert("Array index: " + JSON.stringify(subEx));
 		subEx[subEx.length - 1].body = 
 			subEx[subEx.length - 1].body.replace(']', '');
 		if ( subEx[subEx.length - 1].body.length == 0 ) {
