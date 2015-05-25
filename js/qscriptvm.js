@@ -131,7 +131,6 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 			alert("New empty array");
 		}
 		arrayIndex = this.executeExpression(subEx);
-		alert(arrayIndex);
 
 		if ( i == 0 && ex[j+1] == '=' &&
 			!this.currentFunc.locals.hasOwnProperty(ex[i].body) ) {
@@ -139,8 +138,8 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 			this.currentFunc.locals[ex[i].body] = new Array();
 			this.buildLocals(this.currentFunc);
 		}
-		expr += this.translateId( (this.currentFunc), ex[i].body) + '[' + arrayIndex + ']';
-		i = j;
+		expr += this.translateId( (this.currentFunc), ex[i].body);// + '[' + arrayIndex + ']';
+		i = j-1;
 
 	} else {
 		// Detect assignment of new local variables.
@@ -211,7 +210,6 @@ quantum.QScript.prototype.getCurrentLocals = function() {
   var locals = [];
   // Get current values of local variables.
   var va = this.eval_(this.currentFunc.localExpr);
-alert(JSON.stringify(va));
   // Create list of local variables with values for easy display.
   for (i = 0; i < this.currentFunc.localIds.length; i++) {
     locals.push([this.currentFunc.localIds[i], va[i].toString()]);
