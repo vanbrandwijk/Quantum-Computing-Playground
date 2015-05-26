@@ -111,7 +111,7 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 			if ( ex[j].body.contains('[') ) {
 				nestLevel++;
 			}
-			subEx.push(ex[j]);
+			subEx.push(jQuery.extend(true, {}, ex[j]));
 			if ( ex[j].body.contains(']') ) {
 				nestLevel--;
 			}
@@ -131,14 +131,13 @@ quantum.QScript.prototype.executeExpression = function(ex, opt_prefix) {
 			alert("New empty array");
 		}
 		arrayIndex = this.executeExpression(subEx);
-
-		if ( i == 0 && ex[j+1] == '=' &&
+//problem here, if j doesn't exist.
+		if ( i == 0 && ex.length > 1 && ex[j].body == '=' &&
 			!this.currentFunc.locals.hasOwnProperty(ex[i].body) ) {
-			//new array
-			this.currentFunc.locals[ex[i].body] = new Array();
+		expr += this.translateId( (this.currentFunc), ex[i].body) + ' = new Array();';
 			this.buildLocals(this.currentFunc);
 		}
-		expr += this.translateId( (this.currentFunc), ex[i].body);// + '[' + arrayIndex + ']';
+		expr += this.translateId( (this.currentFunc), ex[i].body) + '[' + arrayIndex + ']';
 		i = j-1;
 
 	} else {

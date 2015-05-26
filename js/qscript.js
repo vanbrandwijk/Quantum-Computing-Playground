@@ -27,7 +27,7 @@ CodeMirror.defineMode('qscript', function(config) {
     'true': true, 'false': true, 'this': true, 'null': true, 'undefined': true
   };
 
-  var isOperatorChar = /[+\-*&^%:=<>!|\/]/;
+  var isOperatorChar = /[+\-*&^%:=<>!|\/\[\]]/;
 
   var curPunc;
 
@@ -53,7 +53,7 @@ CodeMirror.defineMode('qscript', function(config) {
       }
       return 'number';
     }
-    if (/[\[\]{}\(\),;\:\.]/.test(ch)) {
+    if (/[{}\(\),;\:\.]/.test(ch)) {
       curPunc = ch;
       return null;
     }
